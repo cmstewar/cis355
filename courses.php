@@ -90,7 +90,7 @@ function printCourses($prefix, $courseNumber, $instructor) {
     $string = "https://api.svsu.edu/courses?prefix=$prefix&courseNumber=$courseNumber&term=$term&instructor=$instructor";
     echo "<h3>2019 - Spring</h3>";
     printListing($string);
-
+    
     $term = "19/SU";
     $string = "https://api.svsu.edu/courses?prefix=$prefix&courseNumber=$courseNumber&term=$term&instructor=$instructor";
     echo "<h3>2019 - Summer</h3>";
