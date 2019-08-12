@@ -4,7 +4,7 @@ printForm();
 // display the entry form for course search
 function printForm(){
 	echo '<h2>Course Lookup</h2>';
-	// print user entry form 
+	// print user entry form
 	echo "<form action='courses.php'>";
 	echo "Course Prefix (Department)<br/>";
 	echo "<input type='text' placeholder='Either CS or CIS' name='prefix'><br/>";
