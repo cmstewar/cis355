@@ -75,8 +75,8 @@ function printForm() {
     echo "<input type='text' placeholder='Course Number (116)' name='courseNumber'><br/>";
     echo "Instructor<br/>";
     echo "<input type='text' placeholder='Instructor Username (gpcorser)' name='instructor'><br/>";
-    #echo "Day of the week<br/>";
-    #echo "<input type='text' placeholder='Day of the Week' name='weekDay'><br/>";
+    echo "Day of the week<br/>";
+    echo "<input type='text' placeholder='Day of the Week' name='weekDay'><br/>";
     echo "<input type='submit' value='Submit'>";
     echo "</form>";
 }
