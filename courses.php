@@ -13,11 +13,12 @@ main();
 function main() {
 
     echo '<html>';
+   
 
 
     // open html body section
     echo '<body>';
-
+     echo '<a href="https://github.com/cmstewar/cis355" class="btn btn-primary">Git-Hub code</a>';
 
     // in html body section, if gpcorser's schedule, then print gpcorser's heading, else print general CS/CIS/CSIS heading
     if (!strcmp($_GET['instructor'], 'gpcorser')) {
@@ -90,7 +91,7 @@ function printCourses($prefix, $courseNumber, $instructor) {
     $string = "https://api.svsu.edu/courses?prefix=$prefix&courseNumber=$courseNumber&term=$term&instructor=$instructor";
     echo "<h3>2019 - Spring</h3>";
     printListing($string);
-    
+
     $term = "19/SU";
     $string = "https://api.svsu.edu/courses?prefix=$prefix&courseNumber=$courseNumber&term=$term&instructor=$instructor";
     echo "<h3>2019 - Summer</h3>";
