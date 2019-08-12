@@ -550,7 +550,7 @@ function printListing($apiCall) {
         } // end foreach Friday
         foreach ($obj->courses as $course) {
             
-            if(strcmp(substr($course->meetingTimes[0]->days, 0, 1), '')) continue;
+            if(strcmp(substr($course->meetingTimes[0]->method, 0, 1), 'O')) continue;
            
             $building = strtoupper(trim($_GET['building']));
             $buildingMatch = false;
