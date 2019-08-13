@@ -213,7 +213,7 @@ function printListing($apiCall) {
                 $printline .= "(Online)";
             else
             if (substr($course->section, -2, 1) == "7")
-                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room;
+                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room . "(Hybrid)";
             else
                 $printline .= $course->meetingTimes[0]->building . " " . $course->meetingTimes[0]->room;
             $printline .= "</td>";
@@ -294,7 +294,7 @@ function printListing($apiCall) {
                 $printline .= "(Online)";
             else
             if (substr($course->section, -2, 1) == "7")
-                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room;
+                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room . "(Hybrid)";
             else
                 $printline .= $course->meetingTimes[0]->building . " " . $course->meetingTimes[0]->room;
             $printline .= "</td>";
@@ -375,7 +375,7 @@ function printListing($apiCall) {
                 $printline .= "(Online)";
             else
             if (substr($course->section, -2, 1) == "7")
-                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room;
+                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room . "(Hybrid)";
             else
                 $printline .= $course->meetingTimes[0]->building . " " . $course->meetingTimes[0]->room;
             $printline .= "</td>";
@@ -456,7 +456,7 @@ function printListing($apiCall) {
                 $printline .= "(Online)";
             else
             if (substr($course->section, -2, 1) == "7")
-                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room;
+                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room . "(Hybrid)";
             else
                 $printline .= $course->meetingTimes[0]->building . " " . $course->meetingTimes[0]->room;
             $printline .= "</td>";
@@ -537,7 +537,7 @@ function printListing($apiCall) {
                 $printline .= "(Online)";
             else
             if (substr($course->section, -2, 1) == "7")
-                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room;
+                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room . "(Hybrid)";
             else
                 $printline .= $course->meetingTimes[0]->building . " " . $course->meetingTimes[0]->room;
             $printline .= "</td>";
@@ -617,7 +617,7 @@ function printListing($apiCall) {
                 $printline .= "(Online)";
             else
             if (substr($course->section, -2, 1) == "7")
-                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room;
+                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room . "(Hybrid)";
             else
                 $printline .= $course->meetingTimes[0]->building . " " . $course->meetingTimes[0]->room;
             $printline .= "</td>";
@@ -628,86 +628,7 @@ function printListing($apiCall) {
             echo $printline;
         } // end foreach online
         
-        foreach ($obj->courses as $course) {
-            
-            if(strcmp(substr($course->meetingTimes[0]->method, 0, 1), 'H')) continue;
-           
-            $building = strtoupper(trim($_GET['building']));
-            $buildingMatch = false;
-            $thisBuilding0 = trim($course->meetingTimes[0]->building);
-            $thisBuilding1 = trim($course->meetingTimes[1]->building);
-            if ($building && ($thisBuilding0 == $building || $thisBuilding1 == $building))
-                $buildingMatch = true;
-            if (!($building))
-                $buildingMatch = true;
-            if (!$buildingMatch)
-                continue;
-
-            $room = strtoupper(trim($_GET['room']));
-            $roomMatch = false;
-            $thisroom0 = trim($course->meetingTimes[0]->room);
-            $thisroom1 = trim($course->meetingTimes[1]->room);
-            if ($room && ($thisroom0 == $room || $thisroom1 == $room))
-                $roomMatch = true;
-            if (!($room))
-                $roomMatch = true;
-            if (!$roomMatch)
-                continue;
-
-            // different <tr bgcolor=...> for each professor
-            switch ($course->meetingTimes[0]->instructor) {
-                case "james":            // 1
-                    $printline = "<tr bgcolor='#B19CD9'>";  // pastel purple
-                    break;
-                case "icho":             // 2
-                    $printline = "<tr bgcolor='lightblue'>";  // light blue
-                    break;
-                case "krahman":           // 3 
-                    $printline = "<tr bgcolor='pink'>";  // pink
-                    break;
-                case "gpcorser":           // 4
-                    $printline = "<tr bgcolor='yellow'>";   // yellow
-                    break;
-                case "pdharam":           // 5
-                    $printline = "<tr bgcolor='#77DD77'>";  // pastel green (light green)
-                    break;
-                case "amulahuw":           // 6
-                    $printline = "<tr bgcolor='#FFB347'>";  // pastel orange
-                    break;
-                default:
-                    $printline = "<tr>"; // no background color
-            }
-
-            $printline .= "<td width='13%'>" . $course->prefix . " " . $course->courseNumber . "*" . $course->section . "</td>";
-            $printline .= "<td width='40%'>" . $course->title . " (" . $course->lineNumber . ")" . "</td>";
-            $printline .= "<td width='12%'>Available:" . $course->seatsAvailable . " (" . $course->capacity . ")" . "</td>";
-
-            // print day and time column
-            if ($course->meetingTimes[0]->days) {
-                $printline .= "<td width='15%'>" . $course->meetingTimes[0]->days . " " . $course->meetingTimes[0]->startTime;
-                $printline .= "<br /> " . $course->meetingTimes[1]->days . " " . $course->meetingTimes[1]->startTime ;
-                $printline .= "</td>";
-            } else {
-                $printline .= "<td width='15%'>";
-                $printline .= $course->meetingTimes[1]->days . " " . $course->meetingTimes[1]->startTime . "</td> ";
-            }
-
-            // print building and room column
-            $printline .= "<td width='10%'>";
-            if (substr($course->section, -2, 1) == "9")
-                $printline .= "(Online)";
-            else
-            if (substr($course->section, -2, 1) == "7")
-                $printline .= $course->meetingTimes[1]->building . " " . $course->meetingTimes[1]->room . "(Hybrid)";
-            else
-                $printline .= $course->meetingTimes[0]->building . " " . $course->meetingTimes[0]->room;
-            $printline .= "</td>";
-
-            // print instructor column
-            $printline .= "<td width='10%'>" . $course->meetingTimes[0]->instructor . "</td>";
-            $printline .= "</tr>";
-            echo $printline;
-        } // end foreach hybrid
+        
 
         echo "</table>";
         echo "<br/>";
