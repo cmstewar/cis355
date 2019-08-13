@@ -18,7 +18,7 @@ function main() {
 
     // open html body section
     echo '<body>';
-     echo '<a href="https://github.com/cmstewar/cis355" class="btn btn-primary">Git-Hub code</a>';
+
 
     // in html body section, if gpcorser's schedule, then print gpcorser's heading, else print general CS/CIS/CSIS heading
     if (!strcmp($_GET['instructor'], 'gpcorser')) {
@@ -32,8 +32,10 @@ function main() {
         echo $_GET['instructor'] ? ' - Instructor: ' . strtoupper($_GET['instructor']) : "";
         echo '</h2>';
     }
-    // display button for course search
-    echo '<a href="coursesearch.php" class="btn btn-primary">Create a New Search</a>';
+    // display buttons for course search, homepage, and github repository
+    echo '<a class="btn" href="https://github.com/cmstewar/cis355" >Git-Hub code</a>';
+    echo '&nbsp; &nbsp;<a class="btn" href="index.php">Homepage</a>';
+    echo '&nbsp; &nbsp;<a class="btn" href="coursesearch.php" >Create a New Search</a>';
     
     // if user entered something in a search box, then call printCourses() to filter 
     if ($_GET['prefix'] != "" || $_GET['courseNumber'] != "" || $_GET['instructor'] != "") {
@@ -41,18 +43,19 @@ function main() {
     }
     // otherwise call printSemester() for all courses for each semester
     else {
-        echo "<h3>Spring</h3>";
+        echo "<h3>Spring 2019</h3>";
         printSemester("19/SP");
-        echo "<h3>Summer</h3>";
+        echo "<h3>Summer 2019</h3>";
         printSemester("19/SU");
-        echo "<h3>Fall</h3>";
+        echo "<h3>Fall 2019</h3>";
         printSemester("19/FA");
-        echo "<h3>Winter</h3>";
+        echo "<h3>Winter 2020</h3>";
         printSemester("20/WI");
     }
     // display button for course search
-    echo '<a href="coursesearch.php" class="btn btn-primary">Create a New Search</a>';
-
+    echo '<a class="btn" href="https://github.com/cmstewar/cis355" >Git-Hub code</a>';
+    echo '&nbsp; &nbsp;<a class="btn" href="index.php">Homepage</a>';
+    echo '&nbsp; &nbsp;<a class="btn" href="coursesearch.php" >Create a New Search</a>';
     // close html body section
     echo '</body>';
     echo '</html>';
@@ -223,11 +226,7 @@ function printListing($apiCall) {
         
         foreach ($obj->courses as $course) {
             
-          #  if(strcmp(substr($course->meetingTimes[0]->days, 0, 1), 'M')) continue;
             if(strcmp(substr($course->meetingTimes[0]->days, 0, 1), 'T')) continue;
-           # elseif(strcmp(substr($course->meetingTimes[0]->days, 0, 1), 'W')) continue;
-           # elseif(strcmp(substr($course->meetingTimes[0]->days, 0, 1), 'R')) continue;
-            
 
             $building = strtoupper(trim($_GET['building']));
             $buildingMatch = false;
